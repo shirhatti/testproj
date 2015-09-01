@@ -1,0 +1,32 @@
+﻿{
+  "userSecretsId": "aspnet5-tablestoragetest-20150831051839",
+  "version": "1.0.0-*",
+  "description": "tablestoragetest Console Application",
+  "authors": [ "soshir" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "WindowsAzure.Storage": "5.0.1-preview",
+    "Microsoft.Framework.Configuration": "1.0.0-beta7",
+    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta7"
+  },
+
+  "commands": {
+    "tablestoragetest": "tablestoragetest"
+  },
+
+  "frameworks": {
+    "dnx451": { },
+    "dnxcore50": {
+      "dependencies": {
+        "System.Collections": "4.0.10-beta-23109",
+        "System.Console": "4.0.0-beta-23109",
+        "System.Linq": "4.0.0-beta-23109",
+        "System.Threading": "4.0.10-beta-23109",
+        "Microsoft.CSharp": "4.0.0-beta-23109"
+      }
+    }
+  }
+}
