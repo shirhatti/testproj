@@ -15,6 +15,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
 using Microsoft.Dnx.Runtime;
+using Microsoft.Framework.DependencyInjection;
 
 namespace testproj
 {
