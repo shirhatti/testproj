@@ -192,7 +192,7 @@ namespace tablestoragetest
 
         public void Main(string[] args)
         {
-
+            createUrl("msft", "https://www.microsoft.com");
             Console.ReadLine();
         }
     }

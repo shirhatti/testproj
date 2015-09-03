@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Diagnostics;
+﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Routing;
-using Microsoft.AspNet.Authentication;
 using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.AspNet.Authentication.OpenIdConnect;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.Logging.Console;
 using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.DependencyInjection;
+using testproj.Contexts;
 
 namespace testproj
 {
@@ -71,10 +63,12 @@ namespace testproj
 
             // Add MVC services to the services container.
             services.AddMvc();
+            var context = new AzureTableContext(Configuration["Authentication:AzureStorageAccount:StorageConnectionString"], Configuration["Authentication:AzureStorageAccount:version"]);
+            services.AddInstance<ITableContext>(context);
         }
 
         // Configure is called after ConfigureServices is called.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ITableContext tableContext)
         {
             loggerFactory.MinimumLevel = LogLevel.Information;
             loggerFactory.AddConsole();
@@ -114,6 +108,9 @@ namespace testproj
 
             // Add MVC to the request pipeline.
             app.UseMvc();
+
+            // Initialize DB context
+            tableContext.Configure();
         }
     }
 }
