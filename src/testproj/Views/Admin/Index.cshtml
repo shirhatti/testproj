@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Admin Page";
+}
+
+<div ng-app="adminPage">
+    <div class="row" ng-controller="AdminCtrl">
+        <div class="col-md-12">
+            <h2>Manage Users </h2>
+            <hr>
+            <div>
+                <div class="col-lg-3 col-sm-3">Search:</div>
+                <div class="col-lg-6 col-sm-6"><input type="text" class="form-control" ng-model="filterText" /></div>
+                <div class="col-lg-3 col-sm-3"><button type="button" class="btn btn-default pull-right" ng-click="openEditModal($index, 'new', -1)">Create New Url</button></div>
+                <br />
+                <br />
+            </div>
+            <div ng-repeat="alert in alerts">
+                <br />
+                <alert type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+            </div>
+            <div class="row">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Identifier</th>
+                            <th>Full url</th>
+                            <th style="width: 50px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="user in data | filter:filterText | limitTo: (10*(currentPage-1)) - filteredData.length | limitTo: 10">
+                        <tr ng-mouseenter="setHoverId(user.id)" ng-mouseleave="setHoverId(-1)" style="height: 55px">
+                            <td style="vertical-align:middle">
+                                {{"https://go.asp.net/" + user.Key}}
+                            </td>
+                            <td style="vertical-align:middle">
+                                {{user.Value}}
+                            </td>
+                            <td data-title="'Actions'">
+                                <div @*ng-show="hoverId === user.id"*@>
+                                    <button type="button" class="btn btn-primary" ng-click="openEditModal($index, 'edit', user.id)" style="vertical-align: middle;">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" align="center">
+                                <pagination direction-links="false" total-items="filteredData.length" ng-model="currentPage" num-pages="smallnumPages"></pagination>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

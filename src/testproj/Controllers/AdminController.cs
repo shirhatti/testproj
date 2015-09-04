@@ -15,13 +15,9 @@ namespace testproj.Controllers
     {
         // GET: /<controller>/
         [Authorize("Admin")]
-        public string Index()
+        public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return "hello " + User.Identity.Name;
-            }
-            return "unreachable";
+            return View();
         }
     }
 }

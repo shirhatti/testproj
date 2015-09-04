@@ -32,3 +32,7 @@ textarea {
         z-index: 10 !important;
     }
 }
+
+.ng-table {
+    border: 1px solid #000;
+}

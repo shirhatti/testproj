@@ -63,7 +63,7 @@ namespace testproj
 
             // Add MVC services to the services container.
             services.AddMvc();
-            var context = new AzureTableContext(Configuration["Authentication:AzureStorageAccount:StorageConnectionString"], Configuration["Authentication:AzureStorageAccount:version"]);
+            var context = new TableCacheContext(Configuration["Authentication:AzureStorageAccount:StorageConnectionString"], Configuration["Authentication:AzureStorageAccount:version"]);
             services.AddInstance<ITableContext>(context);
         }
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using testproj.Contexts;
 using testproj.Models;
+using testsite.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,10 +23,10 @@ namespace testproj.Controllers
 
         // GET: api/Url
         [HttpGet]
-        public async Task<Dictionary<string, string>> Get()
+        public async Task<IEnumerable<KeyValuePair<string, string>>> Get()
         {
             var ret = await _tableContext.RetrieveUrl();
-            return ret;
+            return ret.ToList();
         }
 
         // GET api/Url/5
@@ -41,20 +42,8 @@ namespace testproj.Controllers
         public async Task<string> Post(UrlCreateViewModel url)
         {
             var ret = await _tableContext.CreateUrl(url.fullPath);
-            return "https://go.asp.net/" + ret;
+            return ret;
 
-        }
-
-        // PUT api/Url/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/Url/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

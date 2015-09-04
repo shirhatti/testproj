@@ -192,7 +192,8 @@ namespace tablestoragetest
 
         public void Main(string[] args)
         {
-            createUrl("msft", "https://www.microsoft.com");
+            _urltable.DeleteIfExistsAsync().Wait();
+            _indextable.DeleteIfExistsAsync().Wait();
             Console.ReadLine();
         }
     }
