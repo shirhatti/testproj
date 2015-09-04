@@ -31,19 +31,26 @@ namespace testproj.Controllers
 
         // GET api/Url/5
         [HttpGet("{identifier}")]
-        public async Task<string> Get(string identifier)
+        public async Task<KeyValuePair<string, string>> Get(string identifier)
         {
             var ret = await _tableContext.ResolverUrl(identifier);
-            return ret;
+            return new KeyValuePair<string, string>(identifier, ret);
         }
 
         // POST api/Url
         [HttpPost]
-        public async Task<string> Post(UrlCreateViewModel url)
+        public async Task<KeyValuePair<string, string>> Post([FromBody]UrlCreateViewModel url)
         {
-            var ret = await _tableContext.CreateUrl(url.fullPath);
-            return ret;
+            var ret = await _tableContext.CreateUrl(url.Value);
+            return new KeyValuePair<string, string>(ret, url.Value);
 
+        }
+
+        // PUT api/Url/5
+        [HttpPut("{identifier}")]
+        public KeyValuePair<string, string> Put([FromBody]UrlEditViewModel url)
+        {
+            return new KeyValuePair<string, string>(url.Key, url.Value);
         }
     }
 }

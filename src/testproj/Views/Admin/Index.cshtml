@@ -5,7 +5,7 @@
 <div ng-app="adminPage">
     <div class="row" ng-controller="AdminCtrl">
         <div class="col-md-12">
-            <h2>Manage Users </h2>
+            <h2>Manage Urls </h2>
             <hr>
             <div>
                 <div class="col-lg-3 col-sm-3">Search:</div>
@@ -22,22 +22,22 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Identifier</th>
-                            <th>Full url</th>
+                            <th style="width: 50%;">Identifier</th>
+                            <th style="width: 50%;">Full url</th>
                             <th style="width: 50px;">Actions</th>
                         </tr>
                     </thead>
-                    <tbody ng-repeat="user in data | filter:filterText | limitTo: (10*(currentPage-1)) - filteredData.length | limitTo: 10">
+                    <tbody ng-repeat="link in data | filter:filterText | limitTo: (10*(currentPage-1)) - filteredData.length | limitTo: 10">
                         <tr ng-mouseenter="setHoverId(user.id)" ng-mouseleave="setHoverId(-1)" style="height: 55px">
                             <td style="vertical-align:middle">
-                                {{"https://go.asp.net/" + user.Key}}
+                                {{"https://go.asp.net/" + link.Key}}
                             </td>
                             <td style="vertical-align:middle">
-                                {{user.Value}}
+                                {{link.Value}}
                             </td>
                             <td data-title="'Actions'">
-                                <div @*ng-show="hoverId === user.id"*@>
-                                    <button type="button" class="btn btn-primary" ng-click="openEditModal($index, 'edit', user.id)" style="vertical-align: middle;">
+                                <div>
+                                    <button type="button" class="btn btn-primary" ng-click="openEditModal($index, 'edit', link.Key)" style="vertical-align: middle;">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </button>
                                 </div>
@@ -47,7 +47,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="5" align="center">
-                                <pagination direction-links="false" total-items="filteredData.length" ng-model="currentPage" num-pages="smallnumPages"></pagination>
+                                <pagination direction-links="true" total-items="filteredData.length" ng-model="currentPage" num-pages="smallnumPages"></pagination>
                             </td>
                         </tr>
                     </tfoot>

@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 namespace testproj.Models
 {
     public class UrlCreateViewModel
-    {        public string fullPath { get; set; }
+    {
+        public string Value { get; set; }
+    }
+
+    public class UrlEditViewModel
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 }
