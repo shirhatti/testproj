@@ -10,7 +10,7 @@ using testsite.Models;
 
 namespace testproj.Controllers
 {
-    [Route("/admin")]
+    [Route("/admin/index")]
     public class AdminController : Controller
     {
         // GET: /<controller>/
